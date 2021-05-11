@@ -1,9 +1,10 @@
 import cv2
 import os
 from matplotlib import pyplot as plot
+from params import *
 
-#MASKS_PATH = os.path.abspath(os.path.join(os.getcwd(), "Dataset", "train", "lung_aca", "masks", "data"))
-MASKS_PATH = os.path.abspath(os.path.join(os.getcwd(), "Dataset", "test", "lung_aca", "masks", "data"))
+#MASKS_PATH = os.path.abspath(os.path.join(TEST_PATH, "lung_aca", "masks", "data"))
+MASKS_PATH = os.path.abspath(os.path.join(TRAIN_PATH, "masks", "data"))
 
 ctr = 0
 for img_name in os.listdir(MASKS_PATH):
