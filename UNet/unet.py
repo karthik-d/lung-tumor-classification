@@ -6,8 +6,8 @@ import warnings
 import numpy as np
 import pandas as pd
 
-import matplotlib.pyplot as plt
-import cv2
+#import matplotlib.pyplot as plt
+#import cv2
 
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Model, load_model
@@ -33,14 +33,15 @@ TEST_PATH = os.path.join(BASE_PATH, 'test', CLASS_NAME)
 # For the Image Data Generator
 GENERATOR_SEED = 100
 # Train Parameters
-BATCH_SIZE = 16
+BATCH_SIZE = 8
+NUM_INPUTS = len(os.listdir(os.path.join(TRAIN_PATH, 'images', 'data')))
 
 def coupled_traindata_generator(generators):
     for(img, mask) in zip(generators[0], generators[1]):
-        yield (img, mask)
+        yield img[0], mask[0]
 
 def make_train_generators():
-
+    print(os.path.join(TRAIN_PATH, 'images'))
     image_data_generator = ImageDataGenerator().flow_from_directory(
                                                     os.path.join(TRAIN_PATH, 'images'), 
                                                     batch_size = BATCH_SIZE, 
@@ -48,6 +49,7 @@ def make_train_generators():
                                                     seed = GENERATOR_SEED,
                                                     color_mode="rgb")
 
+    print(os.path.join(TRAIN_PATH, 'masks'))
     mask_data_generator = ImageDataGenerator().flow_from_directory(
                                                     os.path.join(TRAIN_PATH, 'masks'), 
                                                     batch_size = BATCH_SIZE, 
@@ -56,12 +58,13 @@ def make_train_generators():
                                                     color_mode="grayscale")
     return image_data_generator, mask_data_generator
 
+"""
 input_generator = coupled_traindata_generator(make_train_generators())
-
-for i in range(2):
-    img,mask = input_generator.next()
-    print(img.shape)
-    print(mask.shape)
+for data_pair in input_generator:
+    print(data_pair[1])  # Prints ONE MASK
+    break
+exit()
+"""
 
 def make_model():
     inputs = Input((IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
@@ -118,8 +121,22 @@ def make_model():
     outputs = Conv2D(1, (1, 1), activation='sigmoid') (c9)
 
     model = Model(inputs=[inputs], outputs=[outputs])
-    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[mean_iou])
-    model.summary()
-
     return model
-    
+   
+# METRICS
+metrics = list()
+"""
+metrics = [ 
+    tf.keras.metrics.MeanIoU(num_classes=2),
+]
+"""
+
+model = make_model()
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=metrics)
+model.summary()
+
+
+input_generator = coupled_traindata_generator(make_train_generators())
+model.fit_generator(input_generator,
+                    epochs=50,
+                    steps_per_epoch=(NUM_INPUTS // BATCH_SIZE))
