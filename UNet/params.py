@@ -15,5 +15,7 @@ TEST_PATH = os.path.join(BASE_PATH, 'test', CLASS_NAME)
 GENERATOR_SEED = 100
 
 # Train Parameters
-BATCH_SIZE = 8
+BATCH_SIZE = 16
 NUM_INPUTS = len(os.listdir(os.path.join(TRAIN_PATH, 'images', 'data')))
+NUM_EPOCHS = 20
+NUM_CLASSES = 2
