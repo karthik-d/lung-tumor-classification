@@ -24,7 +24,7 @@ from keras import backend as K
 import tensorflow as tf
 
 def normalize_image(img):
-    return img // 255
+    return img / 255
 
 def coupled_traindata_generator(generators):
     for(img, mask) in zip(generators[0], generators[1]):
