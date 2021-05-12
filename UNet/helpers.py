@@ -1,4 +1,5 @@
 import keras
+import keras.backend as K
 import numpy as np
 from matplotlib import pyplot as plot
 import os
@@ -58,18 +59,19 @@ def get_mask_from_prediction(prediction):
 	mask = np.expand_dims(mask, axis=-1)
 	return mask
 
+def get_mask_img_from_prediction(prediction):
+	mask = np.argmax(prediction, axis=-1)
+	return mask
+
 def mean_iou(y_true, y_pred):
-	prec = []
-	y_pred = get_mask_from_prediction(y_pred)
-	#for t in np.arange(0.5, 1.0, 0.05):
-	for t in np.arange(0.5):
-		y_pred_ = tf.to_int32(y_pred > t)
-		score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, 2)
-		keras.backend.get_session().run(tf.local_variables_initializer())
-		with tf.control_dependencies([up_opt]):
-			score = tf.identity(score)
-		prec.append(score)
-	return keras.backend.mean(keras.backend.stack(prec), axis=0)
+    y_pred = get_mask_from_prediction(y_pred)
+    y_true = K.cast(K.equal(y_true, 1), K.floatx())
+    y_pred = K.cast(K.equal(y_pred, 1), K.floatx())
+    intersection = K.sum(y_true * y_pred)
+    union = K.sum(y_true) + K.sum(y_pred) - intersection
+    # avoid divide by zero - if the union is zero, return 1
+    # otherwise, return the intersection over union
+    return K.switch(K.equal(union, 0), 1.0, intersection / union)
 
 def display_mask(prediction):
 	mask = np.argmax(prediction, axis=-1)
@@ -88,3 +90,11 @@ def get_recent_weight_file():
 				weight_file = filename
 				max_epoch = epoch
 	return weight_file
+
+def plot_img_mask(img, mask):
+	img_axis = plot.subplot(1, 2, 1)
+	img_axis.imshow(img)
+	mask_axis = plot.subplot(1, 2, 2)
+	mask = get_mask_img_from_prediction(mask)
+	mask_axis.imshow(mask, cmap='gray')
+	plot.show()
