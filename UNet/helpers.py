@@ -1,9 +1,10 @@
 import keras
 import numpy as np
 from matplotlib import pyplot as plot
-
 import os
 import cv2
+
+from params import *
 
 class InputSequencer(keras.utils.Sequence):
 
@@ -77,4 +78,13 @@ def display_mask(prediction):
 	plot.show()
 
 def get_recent_weight_file():
-	
+	weight_file = None
+	max_epoch = -1
+	for filename in os.listdir(WEIGHTS_PATH):
+		parts = filename.split('.')
+		if('hdf5' in parts):
+			epoch = int(parts[1])
+			if(epoch>max_epoch):
+				weight_file = filename
+				max_epoch = epoch
+	return weight_file

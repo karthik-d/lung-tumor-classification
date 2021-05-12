@@ -27,24 +27,25 @@ val_gen = OxfordPets(BATCH_SIZE, IMG_SIZE, val_input_img_paths, val_target_img_p
     mean_iou
 ]"""
 
+
+# "sparse" version of categorical_crossentropy is used
+# because target data is integers.
 def run_train():
 	metrics = list()
 
 	model = get_model()
 	model.summary()
-	# "sparse" version of categorical_crossentropy
-	# because target data is integers.
 	model.compile(optimizer="rmsprop", loss="sparse_categorical_crossentropy", metrics=metrics)
 
 
 	callbacks = [
-		keras.callbacks.ModelCheckpoint("weights.{epoch:02d}.hdf5", 
+		keras.callbacks.ModelCheckpoint(os.path.join(WEIGHTS_PATH, "weights.{epoch:02d}.hdf5"), 
 										save_best_only=False,
 										save_weights_only=True)
 	]
 
-	image_paths = get_train_data_paths()
+	train_img_paths = get_train_data_paths()
 	train_generator = InputSequencer(
-		image_paths
+		train_img_paths
 	)
 	model.fit_generator(train_generator, epochs=NUM_EPOCHS, callbacks=callbacks)

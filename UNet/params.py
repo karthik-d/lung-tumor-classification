@@ -7,16 +7,17 @@ IMG_CHANNELS = 3
 IMG_SIZE = (IMG_HEIGHT, IMG_WIDTH)
 
 # Train and Test paths
-BASE_PATH = os.path.abspath(os.path.join(os.getcwd(), "Dataset"))
+BASE_PATH = os.path.abspath(os.getcwd())
+DATA_PATH = os.path.join(BASE_PATH, 'Dataset')
 CLASS_NAME = "lung_aca"
 
 WEIGHTS_PATH = os.path.join(BASE_PATH, "dynamic")
 
-TRAIN_PATH = os.path.join(BASE_PATH, 'train', CLASS_NAME)
+TRAIN_PATH = os.path.join(DATA_PATH, 'train', CLASS_NAME)
 TRAIN_PATH_IMAGES = os.path.join(TRAIN_PATH, 'images', 'data')
 TRAIN_PATH_MASKS = os.path.join(TRAIN_PATH, 'masks', 'data')
 
-TEST_PATH = os.path.join(BASE_PATH, 'test', CLASS_NAME)
+TEST_PATH = os.path.join(DATA_PATH, 'test', CLASS_NAME)
 TEST_PATH_IMAGES = os.path.join(TEST_PATH, 'images', 'data')
 TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
