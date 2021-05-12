@@ -9,10 +9,17 @@ from params import *
 
 class InputSequencer(keras.utils.Sequence):
 
-	def __init__(self, image_paths):
+	def __init__(self, image_paths, shuffle=True):
 		self.BATCH_SIZE = BATCH_SIZE
 		self.IMG_SIZE = IMG_SIZE
+		self.shuffle = shuffle
 		self.image_paths = image_paths
+		self.indexes = np.arange(len(self.image_paths))
+		self.on_epoch_end()
+
+	def on_epoch_end(self):
+		if(self.shuffle):
+			np.random.shuffle(self.indexes)
 
 	def __len__(self):
 		return len(self.image_paths) // self.BATCH_SIZE
@@ -20,7 +27,10 @@ class InputSequencer(keras.utils.Sequence):
 	def __getitem__(self, idx):
 		"""Returns tuple (input, target) correspond to batch #idx."""
 		i = idx * self.BATCH_SIZE
-		batch_image_paths = self.image_paths[i : i + self.BATCH_SIZE]
+		indices = self.indexes[i : i + self.BATCH_SIZE]
+		
+		batch_image_paths = [ self.image_paths[idx] 
+								for idx in indices ]
 
 		x = np.zeros((self.BATCH_SIZE,) + self.IMG_SIZE + (3,), dtype="float32")
 		y = np.zeros((self.BATCH_SIZE,) + self.IMG_SIZE + (1,), dtype="uint8")
