@@ -41,7 +41,10 @@ class InputSequencer(keras.utils.Sequence):
 			img = cv2.resize(img, self.IMG_SIZE)
 			x[j] = img
 			# Load Masks (y-data)
-			mask_path = os.path.join(TRAIN_PATH_MASKS, get_mask_name(os.path.split(path)[1]))
+			mask_path = os.path.join(
+							TRAIN_PATH_MASKS.format(class_name=get_classname_from_path(path)),
+							get_maskname_from_path(path)
+						)
 			mask = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 			mask = cv2.resize(mask, self.IMG_SIZE)
 			mask[mask<127] = 1
@@ -49,18 +52,31 @@ class InputSequencer(keras.utils.Sequence):
 			y[j] = np.expand_dims(mask, 2)
 		return x, y
 
+def get_classname_from_path(path):
+	for class_name in CLASS_NAMES:
+		if class_name in path:
+			return class_name 
+	return None
+
 def get_train_data_paths():
-	img_paths = [ os.path.join(TRAIN_PATH_IMAGES, img_name)
-        			for img_name in sorted(os.listdir(TRAIN_PATH_IMAGES)) ]
+	img_paths = list()
+	for class_name in CLASS_NAMES:
+		img_dir_path = TRAIN_PATH_IMAGES.format(class_name=class_name)
+		img_paths.extend([ os.path.join(img_dir_path, img_name)
+							for img_name in os.listdir(img_dir_path) ])
 	return img_paths
 
 def get_test_data_paths():
-	img_paths = [ os.path.join(TEST_PATH_IMAGES, img_name)
-        			for img_name in sorted(os.listdir(TEST_PATH_IMAGES)) ]
+	img_paths = list()
+	for class_name in CLASS_NAMES:
+		img_dir_path = TEST_PATH_IMAGES.format(class_name=class_name)
+		img_paths.extend([ os.path.join(img_dir_path, img_name)
+							for img_name in os.listdir(img_dir_path) ])
 	return img_paths
 
-def get_mask_name(img_name):
-	img_name, ext = img_name.split('.')
+def get_maskname_from_path(path):
+	img = os.path.split(path)[1]
+	img_name, ext = img.split('.')
 	mask_name = img_name + '_white'
 	return mask_name+ext 
 
