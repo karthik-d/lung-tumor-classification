@@ -114,12 +114,13 @@ def get_test_data_paths():
 							for img_name in os.listdir(img_dir_path) ])
 	return img_paths
 
-def get_predict_data_paths():
-	img_paths = list()
-	for class_name in CLASS_NAMES:
-		img_dir_path = PREDICT_PATH_IMAGES.format(class_name=class_name)
-		img_paths.extend([ os.path.join(img_dir_path, img_name)
-							for img_name in os.listdir(img_dir_path) ])
+def get_predict_data_paths(class_name):
+	# SET PREDICT_PATH first, in "params.py"
+	img_dir_path = PREDICT_PATH_IMAGES.format(class_name=class_name)
+	img_paths = [
+		os.path.join(img_dir_path, img_name)
+		for img_name in os.listdir(img_dir_path) 
+	]
 	return img_paths
 
 def get_maskname_from_path(path):

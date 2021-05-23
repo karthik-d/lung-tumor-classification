@@ -18,7 +18,7 @@ def run_predict(n=10):
 	print("Loaded", weight_file)
 	model.load_weights(os.path.join(WEIGHTS_PATH, weight_file))
 
-	predict_img_paths = get_predict_data_paths()
+	predict_img_paths = get_predict_data_paths(class_name='lung_n')
 	predict_generator = PredictSequencer(
 		predict_img_paths,
 		shuffle=False
@@ -38,9 +38,20 @@ def run_predict(n=10):
 		plot_img_mask(test_images[idx], mask)
 	"""
 
+	counter = 0
 	for batch_ip in predict_generator:
-		img_ip, img_path = batch_ip
-		img_op = model.predict(img_ip)
-		plot.imshow(img_op[1])
-		plot.show(0)
-		print(len(batch_op))
+		img_ip_batch, img_path_batch = batch_ip
+		mask_op_batch = model.predict(img_ip_batch)	
+		for idx, img_path in enumerate(img_path_batch):
+			img_name = img_path.split('/')[-1]
+			write_path = os.path.join(
+				PREDICT_PATH_MASKS, 
+				img_name
+				).format(
+					class_name = get_classname_from_path(img_path)
+				)
+			mask = get_mask_img_from_prediction(mask_op_batch[idx])
+			cv2.imwrite(write_path, mask)
+		counter += 1
+		if(counter%10==0):
+			print(counter)
