@@ -7,13 +7,9 @@ from params import *
 from unet import get_model
 
 def run_predict(n=10):
-	metrics = [
-		mean_iou
-	]
-
 	model = get_model()
 	model.summary()
-	model.compile(optimizer="rmsprop", loss="sparse_categorical_crossentropy", metrics=metrics)
+	model.compile(optimizer="rmsprop", loss="sparse_categorical_crossentropy")
 
 	weight_file = get_recent_weight_file()
 	if(weight_file is None):
@@ -27,6 +23,7 @@ def run_predict(n=10):
 		test_img_paths
 	)
 
+	"""
 	# Random 'n' images
 	test_images = list()
 	for i in range(n):
@@ -38,3 +35,9 @@ def run_predict(n=10):
 	for idx, mask in enumerate(predictions):
 		plot.imshow(test_images[idx])
 		plot_img_mask(test_images[idx], mask)
+	"""
+
+	for batch_ip in test_generator:
+		print(batch_ip)
+		batch_op = model.predict(batch_ip)
+		print(len(batch_op))
