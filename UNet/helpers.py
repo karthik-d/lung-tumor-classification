@@ -52,6 +52,46 @@ class InputSequencer(keras.utils.Sequence):
 			y[j] = np.expand_dims(mask, 2)
 		return x, y
 
+
+class PredictSequencer(keras.utils.Sequence):
+
+	def __init__(self, image_paths, shuffle=False):
+		self.BATCH_SIZE = BATCH_SIZE
+		self.IMG_SIZE = IMG_SIZE
+		self.shuffle = shuffle
+		self.image_paths = image_paths
+		self.indexes = np.arange(len(self.image_paths))
+		self.on_epoch_end()
+
+	def on_epoch_end(self):
+		if(self.shuffle):
+			np.random.shuffle(self.indexes)
+
+	def __len__(self):
+		return len(self.image_paths) // self.BATCH_SIZE
+
+	def __getitem__(self, idx):
+		"""
+		Returns (input_imgs, input_paths) corresponding to batch #idx
+		"""
+		
+		i = idx * self.BATCH_SIZE
+		indices = self.indexes[i : i + self.BATCH_SIZE]
+		
+		batch_image_paths = [ self.image_paths[idx] 
+								for idx in indices ]
+
+		x = np.zeros((self.BATCH_SIZE,) + self.IMG_SIZE + (3,), dtype="float32")
+		for j, path in enumerate(batch_image_paths):
+			# Load Images (x-data)
+			img = cv2.imread(path)
+			img = img/255  # Normalize
+			img = cv2.resize(img, self.IMG_SIZE)
+			x[j] = img
+
+		return x, batch_image_paths
+
+
 def get_classname_from_path(path):
 	for class_name in CLASS_NAMES:
 		if class_name in path:
@@ -70,6 +110,14 @@ def get_test_data_paths():
 	img_paths = list()
 	for class_name in CLASS_NAMES:
 		img_dir_path = TEST_PATH_IMAGES.format(class_name=class_name)
+		img_paths.extend([ os.path.join(img_dir_path, img_name)
+							for img_name in os.listdir(img_dir_path) ])
+	return img_paths
+
+def get_predict_data_paths():
+	img_paths = list()
+	for class_name in CLASS_NAMES:
+		img_dir_path = PREDICT_PATH_IMAGES.format(class_name=class_name)
 		img_paths.extend([ os.path.join(img_dir_path, img_name)
 							for img_name in os.listdir(img_dir_path) ])
 	return img_paths

@@ -21,6 +21,18 @@ TEST_PATH = os.path.join(DATA_PATH, 'test', '{class_name}')
 TEST_PATH_IMAGES = os.path.join(TEST_PATH, 'images', 'data')
 TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
+# ~/histopathology/second_review/trainset/lung_aca
+PREDICT_PATH = os.path.join(
+	'/'
+	'home', 
+	'mirunap', 
+	'histopathology', 
+	'second_review', 
+	'trainset'
+)
+PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, '{class_name}')
+PREDICT_PATH_MASKS = os.path.join(PREDICT_PATH, '{class_name}_unet_mask')
+
 # For the Image Data Generator
 GENERATOR_SEED = 100
 

@@ -18,9 +18,10 @@ def run_predict(n=10):
 	print("Loaded", weight_file)
 	model.load_weights(os.path.join(WEIGHTS_PATH, weight_file))
 
-	test_img_paths = get_test_data_paths()
-	test_generator = InputSequencer(
-		test_img_paths
+	predict_img_paths = get_predict_data_paths()
+	predict_generator = PredictSequencer(
+		predict_img_paths,
+		shuffle=False
 	)
 
 	"""
@@ -37,7 +38,9 @@ def run_predict(n=10):
 		plot_img_mask(test_images[idx], mask)
 	"""
 
-	for batch_ip in test_generator:
-		print(batch_ip)
-		batch_op = model.predict(batch_ip)
+	for batch_ip in predict_generator:
+		img_ip, img_path = batch_ip
+		img_op = model.predict(img_ip)
+		plot.imshow(img_op[1])
+		plot.show(0)
 		print(len(batch_op))
