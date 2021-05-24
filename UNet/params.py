@@ -9,7 +9,8 @@ IMG_SIZE = (IMG_HEIGHT, IMG_WIDTH)
 # Train and Test paths
 BASE_PATH = os.path.abspath(os.getcwd())
 DATA_PATH = os.path.join(BASE_PATH, 'Dataset')
-CLASS_NAMES = [ "lung_aca", "lung_n", "lung_scc" ]
+#CLASS_NAMES = [ "lung_aca", "lung_n", "lung_scc" ]
+CLASS_NAMES = [ "benign", "malignaent"]
 
 WEIGHTS_PATH = os.path.join(BASE_PATH, "dynamic")
 
@@ -28,11 +29,20 @@ PREDICT_PATH = os.path.join(
 	'mirunap', 
 	'histopathology', 
 	'second_review', 
-	'trainset'
+	'binary_trainset'
 )
 PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, '{class_name}')
 PREDICT_PATH_MASKS = os.path.join(PREDICT_PATH, '{class_name}_unet_mask')
 PREDICT_PATH_EXTRACTS = os.path.join(PREDICT_PATH, '{class_name}_unet_extracts')
+
+# Create Result directories if they don't exist
+for class_name in CLASS_NAMES:
+	mask_path = PREDICT_PATH_MASKS.format(class_name=class_name)
+	if not os.path.isdir(mask_path):
+		os.mkdir(mask_path)
+	extract_path = PREDICT_PATH_EXTRACTS.format(class_name=class_name)
+	if not os.path.isdir(extract_path):
+		os.mkdir(extract_path)
 
 # For the Image Data Generator
 GENERATOR_SEED = 100

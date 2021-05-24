@@ -1,3 +1,4 @@
+from params import *
 from train import run_train 
 from test import run_test
 from predict import run_predict
