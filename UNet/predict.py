@@ -44,12 +44,19 @@ def run_predict(n=10):
 		mask_op_batch = model.predict(img_ip_batch)	
 		for idx, img_path in enumerate(img_path_batch):
 			img_name = img_path.split('/')[-1]
-			write_path = os.path.join(
+			write_path_mask = os.path.join(
 				PREDICT_PATH_MASKS, 
 				img_name
 				).format(
 					class_name = get_classname_from_path(img_path)
 				)
+			write_path_extract = os.path.join(
+				PREDICT_PATH_EXTRACTS, 
+				img_name
+				).format(
+					class_name = get_classname_from_path(img_path)
+				)
+			print(write_path_extract)
 			mask = get_mask_img_from_prediction(mask_op_batch[idx])
 			cv2.imwrite(write_path, mask)
 		counter += 1

@@ -32,6 +32,7 @@ PREDICT_PATH = os.path.join(
 )
 PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, '{class_name}')
 PREDICT_PATH_MASKS = os.path.join(PREDICT_PATH, '{class_name}_unet_mask')
+PREDICT_PATH_EXTRACTS = os.path.join(PREDICT_PATH, '{class_name}_unet_extracts')
 
 # For the Image Data Generator
 GENERATOR_SEED = 100
