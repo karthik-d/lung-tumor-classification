@@ -10,7 +10,7 @@ IMG_SIZE = (IMG_HEIGHT, IMG_WIDTH)
 BASE_PATH = os.path.abspath(os.getcwd())
 DATA_PATH = os.path.join(BASE_PATH, 'Dataset')
 CLASS_NAMES = [ "lung_aca", "lung_n", "lung_scc" ]
-#CLASS_NAMES = [ "benign", "malignaent"]
+#CLASS_NAMES = [ "benign", "malignent"]
 
 WEIGHTS_PATH = os.path.join(BASE_PATH, "dynamic")
 
@@ -29,7 +29,7 @@ PREDICT_PATH = os.path.join(
 	'mirunap', 
 	'histopathology', 
 	'first_review', 
-	'testset'
+	'trainset'
 )
 PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, '{class_name}')
 PREDICT_PATH_MASKS = os.path.join(PREDICT_PATH, '{class_name}_unet_mask')

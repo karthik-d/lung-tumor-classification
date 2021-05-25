@@ -65,6 +65,8 @@ def run_predict(n=10):
 				img_ip = img_ip_batch[idx]
 				img_extract = np.zeros(img_shape)
 				img_extract[mask==1] = img_ip[mask==1]
+				img_extract *= 255
+				img_extract = img_extract.astype(int)
 				cv2.imwrite(write_path_extract, img_extract)
 			counter += 1
 			if(counter%10==0):
