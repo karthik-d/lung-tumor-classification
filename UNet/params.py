@@ -29,7 +29,7 @@ PREDICT_PATH = os.path.join(
 	'mirunap', 
 	'histopathology', 
 	'first_review', 
-	'trainset'
+	'testset'
 )
 PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, '{class_name}')
 PREDICT_PATH_MASKS = os.path.join(PREDICT_PATH, '{class_name}_unet_mask')
