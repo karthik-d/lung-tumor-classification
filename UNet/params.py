@@ -39,15 +39,16 @@ PREDICT_PATH = os.path.join(
 	'{r_type}',
 	'data'
 )
-PREDICT_PATH_IMAGES = PREDICT_PATH.format(r_type='images')
+
+PREDICT_PATH_IMAGES = PREDICT_PATH.format(r_type='images', class_name='{class_name}')
 #PREDICT_PATH_MASKS = PREDICT_PATH.format(r_type='extracts')
-PREDICT_PATH_EXTRACTS = PREDICT_PATH.format(r_type='extracts')
+PREDICT_PATH_EXTRACTS = PREDICT_PATH.format(r_type='extracts', class_name='{class_name}')
 
 # Create Result directories if they don't exist
 for class_name in CLASS_NAMES:
 	extract_path = PREDICT_PATH_EXTRACTS.format(class_name=class_name)
 	if not os.path.isdir(extract_path):
-		os.mkdir(extract_path)
+		os.makedirs(extract_path)
 
 # For the Image Data Generator
 GENERATOR_SEED = 100
