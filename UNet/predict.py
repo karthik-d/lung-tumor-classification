@@ -46,6 +46,7 @@ def run_predict(n=10):
 			mask_op_batch = model.predict(img_ip_batch)	
 			for idx, img_path in enumerate(img_path_batch):
 				img_name = img_path.split('/')[-1]
+				"""
 				# Store the mask
 				write_path_mask = os.path.join(
 					PREDICT_PATH_MASKS, 
@@ -53,8 +54,9 @@ def run_predict(n=10):
 					).format(
 						class_name = class_name
 					)
+				"""
 				mask = get_mask_img_from_prediction(mask_op_batch[idx])
-				cv2.imwrite(write_path_mask, mask)
+				# cv2.imwrite(write_path_mask, mask)
 				# Store the image extracts
 				write_path_extract = os.path.join(
 					PREDICT_PATH_EXTRACTS, 

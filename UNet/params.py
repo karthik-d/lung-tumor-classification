@@ -22,24 +22,29 @@ TEST_PATH = os.path.join(DATA_PATH, 'test', '{class_name}')
 TEST_PATH_IMAGES = os.path.join(TEST_PATH, 'images', 'data')
 TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
+# ~/histopathology/nuclie_segmentation/NucleusMask/NucleusMask/UNet/Dataset/unet_trainset/lung_aca/images/data
 # ~/histopathology/second_review/trainset/lung_aca
 PREDICT_PATH = os.path.join(
 	'/'
 	'home', 
 	'mirunap', 
 	'histopathology', 
-	'first_review', 
-	'trainset'
+	'nuclie_segmentation', 
+	'NucleusMask',
+	'NucleusMask',
+	'UNet',
+	'Dataset',
+	'unet_trainset',
+	'{class_name}',
+	'{r_type}',
+	'data'
 )
-PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, '{class_name}')
-PREDICT_PATH_MASKS = os.path.join(PREDICT_PATH, '{class_name}_unet_mask')
-PREDICT_PATH_EXTRACTS = os.path.join(PREDICT_PATH, '{class_name}_unet_extracts')
+PREDICT_PATH_IMAGES = PREDICT_PATH.format(r_type='images')
+#PREDICT_PATH_MASKS = PREDICT_PATH.format(r_type='extracts')
+PREDICT_PATH_EXTRACTS = PREDICT_PATH.format(r_type='extracts')
 
 # Create Result directories if they don't exist
 for class_name in CLASS_NAMES:
-	mask_path = PREDICT_PATH_MASKS.format(class_name=class_name)
-	if not os.path.isdir(mask_path):
-		os.mkdir(mask_path)
 	extract_path = PREDICT_PATH_EXTRACTS.format(class_name=class_name)
 	if not os.path.isdir(extract_path):
 		os.mkdir(extract_path)
@@ -52,3 +57,4 @@ BATCH_SIZE = 16
 #NUM_INPUTS = len(os.listdir(os.path.join(TRAIN_PATH, 'images', 'data')))
 NUM_EPOCHS = 20
 NUM_CLASSES = 2
+
