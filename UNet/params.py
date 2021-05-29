@@ -34,7 +34,7 @@ PREDICT_PATH = os.path.join(
 	'NucleusMask',
 	'UNet',
 	'Dataset',
-	'unet_trainset',
+	'unet_testset',
 	'{class_name}',
 	'{r_type}',
 	'data'
