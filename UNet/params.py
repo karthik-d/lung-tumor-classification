@@ -46,7 +46,7 @@ PREDICT_PATH = os.path.join(
 	'mirunap', 
 	'histopathology',
 	'first_review',
-	'trainset_unet',
+	'testset_unet',
 	'{class_name}'
 )
 
