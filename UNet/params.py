@@ -24,6 +24,7 @@ TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
 # ~/histopathology/nuclie_segmentation/NucleusMask/NucleusMask/UNet/Dataset/unet_trainset/lung_aca/images/data
 # ~/histopathology/second_review/trainset/lung_aca
+'''
 PREDICT_PATH = os.path.join(
 	'/'
 	'home', 
@@ -38,11 +39,20 @@ PREDICT_PATH = os.path.join(
 	'{class_name}',
 	'{r_type}',
 	'data'
+)'''
+PREDICT_PATH = os.path.join(
+	'/'
+	'home', 
+	'mirunap', 
+	'histopathology',
+	'first_review',
+	'trainset_unet',
+	'{class_name}'
 )
 
-PREDICT_PATH_IMAGES = PREDICT_PATH.format(r_type='images', class_name='{class_name}')
+PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, 'images')
 #PREDICT_PATH_MASKS = PREDICT_PATH.format(r_type='extracts')
-PREDICT_PATH_EXTRACTS = PREDICT_PATH.format(r_type='extracts', class_name='{class_name}')
+PREDICT_PATH_EXTRACTS = os.path.join(PREDICT_PATH, 'extracts')
 
 # Create Result directories if they don't exist
 for class_name in CLASS_NAMES:
