@@ -15,7 +15,7 @@ print(df_test_full.columns)
 
 #Drop the unwanted columns
 train = df_train_full.drop(['Unnamed: 0', 'image_name'],axis=1)
-test = df_test_full.drop(['Unnamed: 0'],axis=1)
+test = df_test_full.drop(['img_name'],axis=1)
 
 """
 #Label Encode categorical features
@@ -72,7 +72,7 @@ for n_fold, (train_idx, valid_idx) in enumerate(folds.split(train[features], tra
 # In[19]:
 
 submission = pd.DataFrame({
-    "image_name": df_test.image_name, 
+    "image_name": df_test.img_name, 
     "target": sub_preds
 })
 submission.to_csv('submission.csv', index=False)
