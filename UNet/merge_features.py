@@ -3,7 +3,8 @@ import pandas as pd
 model_names = [
 	'densenet',
 	'resnet',
-	'inception'
+	'inception',
+	'effnet'
 ]
 
 file_suffix = [
