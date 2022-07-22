@@ -20,11 +20,11 @@ CLASS_NAMES = [ "lung_aca", "lung_n", "lung_scc" ]
 
 WEIGHTS_PATH = os.path.join(BASE_PATH, "dynamic")
 
-TRAIN_PATH = os.path.join(DATA_PATH, 'train', '{class_name}')
+TRAIN_PATH = os.path.join(DATA_PATH, 'trainset', '{class_name}')
 TRAIN_PATH_IMAGES = os.path.join(TRAIN_PATH, 'images', 'data')
 TRAIN_PATH_MASKS = os.path.join(TRAIN_PATH, 'masks', 'data')
 
-TEST_PATH = os.path.join(DATA_PATH, 'test', '{class_name}')
+TEST_PATH = os.path.join(DATA_PATH, 'testset', '{class_name}')
 TEST_PATH_IMAGES = os.path.join(TEST_PATH, 'images', 'data')
 TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
