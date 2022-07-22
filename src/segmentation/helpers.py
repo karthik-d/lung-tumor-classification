@@ -102,6 +102,7 @@ def get_train_data_paths():
 	img_paths = list()
 	for class_name in CLASS_NAMES:
 		img_dir_path = TRAIN_PATH_IMAGES.format(class_name=class_name)
+		print(img_dir_path)
 		img_paths.extend([ os.path.join(img_dir_path, img_name)
 							for img_name in os.listdir(img_dir_path) ])
 	return img_paths

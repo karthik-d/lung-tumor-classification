@@ -9,22 +9,26 @@ IMG_SIZE = (IMG_HEIGHT, IMG_WIDTH)
 # Train and Test paths
 BASE_PATH = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), 
-    *((os.path.pardir,)*2
+    *((os.path.pardir,)*2)
 )
 DATA_PATH = os.path.join(
     BASE_PATH, 
-    'data'
-    'dataset'
+    'data',
+    'dataset',
+)
+SEG_DATA_PATH = os.path.join(
+    DATA_PATH,
+    'segmentation'
 )
 CLASS_NAMES = [ "lung_aca", "lung_n", "lung_scc" ]
 
 WEIGHTS_PATH = os.path.join(BASE_PATH, "dynamic")
 
-TRAIN_PATH = os.path.join(DATA_PATH, 'trainset', '{class_name}')
+TRAIN_PATH = os.path.join(SEG_DATA_PATH, 'trainset', '{class_name}')
 TRAIN_PATH_IMAGES = os.path.join(TRAIN_PATH, 'images', 'data')
 TRAIN_PATH_MASKS = os.path.join(TRAIN_PATH, 'masks', 'data')
 
-TEST_PATH = os.path.join(DATA_PATH, 'testset', '{class_name}')
+TEST_PATH = os.path.join(SEG_DATA_PATH, 'testset', '{class_name}')
 TEST_PATH_IMAGES = os.path.join(TEST_PATH, 'images', 'data')
 TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
@@ -46,17 +50,13 @@ PREDICT_PATH = os.path.join(
 )'''
 
 PREDICT_PATH = os.path.join(
-	'/'
-	'home', 
-	'mirunap', 
-	'histopathology',
-	'first_review',
-	'testset_unet',
+	DATA_PATH,
+    'trainset'
 	'{class_name}'
 )
 
-PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, 'images')
-PREDICT_PATH_EXTRACTS = os.path.join(PREDICT_PATH, 'extracts')
+PREDICT_PATH_IMAGES = os.path.join(PREDICT_PATH, 'wsi')
+PREDICT_PATH_EXTRACTS = os.path.join(PREDICT_PATH, 'nuclei')
 
 # Create Result directories if they don't exist
 for class_name in CLASS_NAMES:
