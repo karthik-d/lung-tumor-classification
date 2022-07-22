@@ -37,8 +37,15 @@ class InputSequencer(keras.utils.Sequence):
 		for j, path in enumerate(batch_image_paths):
 			# Load Images (x-data)
 			img = cv2.imread(path)
-			img = img/255  # Normalize
 			img = cv2.resize(img, self.IMG_SIZE)
+
+			# CLAHE preprocess
+			clahe_applicator = cv2.createCLAHE(clipLimit=3)
+			temp_img = None
+			img = clahe_applicator.apply(img)
+			img = cv2.normalize(img, temp_img, 0, 255, cv2.NORM_MINMAX)
+			img = img/255  # Normalize
+
 			x[j] = img
 			# Load Masks (y-data)
 			mask_path = os.path.join(
