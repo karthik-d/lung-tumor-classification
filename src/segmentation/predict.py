@@ -7,6 +7,7 @@ from params import *
 from unet import get_model
 
 def run_predict(n=10):
+    
 	model = get_model()
 	model.summary()
 	model.compile(optimizer="rmsprop", loss="sparse_categorical_crossentropy")
