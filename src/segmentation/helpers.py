@@ -53,8 +53,11 @@ class InputSequencer(keras.utils.Sequence):
 			)
 			#print(img_normalized)
 			fig, axes = plot.subplots(2)
+			fig.suptitle(os.path.basename(path))
 			axes[0].imshow(img)
+			axes[0].set_title("Original")
 			axes[1].imshow(img_normalized)
+			axes[1].set_title("Normalized")
 			plot.show()
 
 			"""
