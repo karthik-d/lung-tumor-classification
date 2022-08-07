@@ -1,3 +1,6 @@
+from histomicstk.preprocessing.color_normalization.deconvolution_based_normalization import (
+	deconvolution_based_normalization
+)	
 import keras
 import keras.backend as K
 import numpy as np
@@ -39,24 +42,37 @@ class InputSequencer(keras.utils.Sequence):
 			img = cv2.imread(path)
 			img = cv2.resize(img, self.IMG_SIZE)
 
+			# Stain unnixing + color normalization
+			stain_unmixing_routine_params = {
+				'stains': ['hematoxylin', 'eosin'],
+				'stain_unmixing_method': 'macenko_pca',
+			}
+			img_normalized = deconvolution_based_normalization(
+				img,
+				stain_unmixing_routine_params=stain_unmixing_routine_params
+			)
+
+			"""
 			# CLAHE preprocess
 			clahe_applicator = cv2.createCLAHE(clipLimit=3)
 			temp_img = None
 			img = clahe_applicator.apply(img)
 			img = cv2.normalize(img, temp_img, 0, 255, cv2.NORM_MINMAX)
 			img = img/255  # Normalize
+			"""
 
-			x[j] = img
+			x[j] = img_normalized
 			# Load Masks (y-data)
 			mask_path = os.path.join(
-							TRAIN_PATH_MASKS.format(class_name=get_classname_from_path(path)),
-							get_maskname_from_path(path)
-						)
+				TRAIN_PATH_MASKS.format(class_name=get_classname_from_path(path)),
+				get_maskname_from_path(path)
+			)
 			mask = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 			mask = cv2.resize(mask, self.IMG_SIZE)
 			mask[mask<127] = 1
 			mask[mask>=127] = 0   # Split into classes
 			y[j] = np.expand_dims(mask, 2)
+
 		return x, y
 
 
