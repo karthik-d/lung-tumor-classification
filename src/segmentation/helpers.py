@@ -51,6 +51,11 @@ class InputSequencer(keras.utils.Sequence):
 				img,
 				stain_unmixing_routine_params=stain_unmixing_routine_params
 			)
+			#print(img_normalized)
+			fig, axes = plot.subplots(2)
+			axes[0].imshow(img)
+			axes[1].imshow(img_normalized)
+			plot.show()
 
 			"""
 			# CLAHE preprocess
@@ -60,7 +65,7 @@ class InputSequencer(keras.utils.Sequence):
 			img = cv2.normalize(img, temp_img, 0, 255, cv2.NORM_MINMAX)
 			img = img/255  # Normalize
 			"""
-
+	
 			x[j] = img_normalized
 			# Load Masks (y-data)
 			mask_path = os.path.join(
