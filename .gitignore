@@ -1,5 +1,6 @@
 Dataset/
 Images/
 Result/
+data/dataset/*
 *.zip
 .token
