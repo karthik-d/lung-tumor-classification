@@ -1,7 +1,6 @@
 from histomicstk.preprocessing.color_normalization.deconvolution_based_normalization import (
 	deconvolution_based_normalization
 )	
-import histomicstk
 import keras
 import keras.backend as K
 import numpy as np
@@ -37,13 +36,11 @@ class InputSequencer(keras.utils.Sequence):
 								for idx in indices ]
 
 		x = np.zeros((self.BATCH_SIZE,) + self.IMG_SIZE + (3,), dtype="float32")
-		x_paths = []
 		y = np.zeros((self.BATCH_SIZE,) + self.IMG_SIZE + (1,), dtype="uint8")
 		for j, path in enumerate(batch_image_paths):
 			# Load Images (x-data)
 			img = cv2.imread(path)
 			img = cv2.resize(img, self.IMG_SIZE)
-			print(histomicstk.preprocessing.color_deconvolution.stain_color_map)
 
 			# Stain unnixing + color normalization
 			stain_unmixing_routine_params = {
@@ -52,16 +49,7 @@ class InputSequencer(keras.utils.Sequence):
 			}
 			img_normalized = deconvolution_based_normalization(
 				img,
-				stain_unmixing_routine_params=stain_unmixing_routine_params
-			)
-			#print(img_normalized)
-			# fig, axes = plot.subplots(2)
-			# fig.suptitle(os.path.basename(path))
-			# axes[0].imshow(img)
-			# axes[0].set_title("Original")
-			# axes[1].imshow(img_normalized)
-			# axes[1].set_title("Normalized")
-			# plot.show()
+				stain_unmixing_routine_params=stain_unmixing_routine_param
 
 			"""
 			# CLAHE preprocess
@@ -71,7 +59,7 @@ class InputSequencer(keras.utils.Sequence):
 			img = cv2.normalize(img, temp_img, 0, 255, cv2.NORM_MINMAX)
 			img = img/255  # Normalize
 			"""
-	
+
 			x[j] = img_normalized
 			# Load Masks (y-data)
 			mask_path = os.path.join(
@@ -83,9 +71,8 @@ class InputSequencer(keras.utils.Sequence):
 			mask[mask<127] = 1
 			mask[mask>=127] = 0   # Split into classes
 			y[j] = np.expand_dims(mask, 2)
-			x_paths.append(path)
 
-		return x, y, x_paths
+		return x, y
 
 
 class PredictSequencer(keras.utils.Sequence):
@@ -137,15 +124,6 @@ def get_train_data_paths():
 	img_paths = list()
 	for class_name in CLASS_NAMES:
 		img_dir_path = TRAIN_PATH_IMAGES.format(class_name=class_name)
-		print(img_dir_path)
-		img_paths.extend([ os.path.join(img_dir_path, img_name)
-							for img_name in os.listdir(img_dir_path) ])
-	return img_paths
-
-def get_sample_data_paths():
-	img_paths = list()
-	for class_name in CLASS_NAMES:
-		img_dir_path = SAMPLE_PATH_IMAGES.format(class_name=class_name)
 		print(img_dir_path)
 		img_paths.extend([ os.path.join(img_dir_path, img_name)
 							for img_name in os.listdir(img_dir_path) ])
