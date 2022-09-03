@@ -32,6 +32,10 @@ TEST_PATH = os.path.join(SEG_DATA_PATH, 'testset', '{class_name}')
 TEST_PATH_IMAGES = os.path.join(TEST_PATH, 'images', 'data')
 TEST_PATH_MASKS = os.path.join(TEST_PATH, 'masks', 'data')
 
+SAMPLE_PATH = os.path.join(SEG_DATA_PATH, 'samples', '{class_name}')
+SAMPLE_PATH_IMAGES = os.path.join(SAMPLE_PATH, 'images', 'data')
+SAMPLE_PATH_MASKS = os.path.join(SAMPLE_PATH, 'masks', 'data')
+
 '''
 PREDICT_PATH = os.path.join(
 	'/'
@@ -68,7 +72,7 @@ for class_name in CLASS_NAMES:
 GENERATOR_SEED = 100
 
 # Train Parameters
-BATCH_SIZE = 16
+BATCH_SIZE = 1
 #NUM_INPUTS = len(os.listdir(os.path.join(TRAIN_PATH, 'images', 'data')))
 NUM_EPOCHS = 20
 NUM_CLASSES = 2
