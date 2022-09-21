@@ -1,3 +1,4 @@
 # LungCancerDetection
-Classification of histopathology images to detect cancer in the lungs.    
-A two-step segmentation and classification approach.
+
+- Classification of histopathology images to detect cancer in the lungs.    
+- Proves the efficacy of nucleus segmentation in the classification of tumors.
