@@ -1,8 +1,9 @@
 # Lung Tumor Subtyping
 
+[Link to the Research Manuscript](./Documentation/Draft-1.pdf)
+
 <img src="./figures/DrawIO/Overall-Flowchart_V3.drawio.png" width="800">
 
-- [Research Manuscript](./Documentation/Draft-1.pdf)
 - Deep-learning analysis of lung histopathology images to identify lung tumor types.    
 - Study of the imapct of nucleus segmentation in tumor subtyping.
 - The complete study is summarized as a brief algorithm below.        
