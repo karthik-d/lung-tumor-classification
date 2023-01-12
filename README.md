@@ -11,6 +11,7 @@
   - 768 x 768 resolution images of lung histology.
   - Contains patch-level labels of tumor type.
   - HIPAA compliant and validated source.
+  - [Detailed data description](https://arxiv.org/abs/1912.12142v1).
 - For further analysis and segmentation, ground truth was prepared using a semi-automatic annotation strategy with the help of expert pathologists.
 
 ## Common Downstream Tumor Classification
