@@ -15,6 +15,10 @@
   - HIPAA compliant and validated source.
   - [Detailed data description](https://arxiv.org/abs/1912.12142v1).
 - For further analysis and segmentation, ground truth was prepared using a semi-automatic annotation strategy with the help of expert pathologists.
+  - Automated nuclear region annotation is obtained using a stain-based color thresholding strategy, detailed in the algorithm below.
+  ![annotation-algorithm](./figures/Annotation-Algorithm.png)
+  - The obtained annotations are corrected and validated by expert pathologists.
+  - Multiple pathologist corrections and compared and averaged. The comparison is assessed using an inter-rater agreement score.
 
 ## Common Downstream Tumor Classification
 
