@@ -1,11 +1,12 @@
 # Lung Tumor Subtyping
 
-- [Research Manuscript](./Documentation/Draft-1.pdf)
+<img src="./figures/DrawIO/Overall-Flowchart_V3.drawio.png" width="800">
 
+- [Research Manuscript](./Documentation/Draft-1.pdf)
 - Deep-learning analysis of lung histopathology images to identify lung tumor types.    
 - Study of the imapct of nucleus segmentation in tumor subtyping.
-
-![Proposed Pipeline](./figures/DrawIO/Overall-Flowchart_V3.drawio.png)
+- The complete study is summarized as a brief algorithm below.        
+  <img src="./figures/Study-Method.png" width="400">
 
 ## Study Dataset
 
@@ -16,7 +17,7 @@
   - [Detailed data description](https://arxiv.org/abs/1912.12142v1).
 - For further analysis and segmentation, ground truth was prepared using a semi-automatic annotation strategy with the help of expert pathologists.
   - Automated nuclear region annotation is obtained using a stain-based color thresholding strategy, detailed in the algorithm below.
-  ![annotation-algorithm](./figures/Annotation-Algorithm.png)
+    <img src="./figures/Annotation-Algorithm.png" width="400" />     
   - The obtained annotations are corrected and validated by expert pathologists.
   - Multiple pathologist corrections and compared and averaged. The comparison is assessed using an inter-rater agreement score.
 
@@ -25,10 +26,10 @@
 - The classifier is a custom lightweight CNN, that performs dowstream tumor subtyping.
 - The common downstream acts as a discriminator reference to compare subtyping performances with and without nucleus segmentation of histology images.
 
-![CNN Classifier](./figures/DrawIO/Classifier-Overall_V1.drawio.png)
+<img src="./figures/DrawIO/Classifier-Overall_V1.drawio.png" width="800">
 
 ## Intermediate Nucleus Segmentation in the P<sub>seg</sub> Pipeline
 
 - Nuclear regions of the histopathology images are segmented out before classification.
 - **Rationale:** The nuclei portray sufficiently distinct visual characteristics under each tumor type to discern them apart.
-- An Xception-style UNet architecture is trained and fine-tuned for classification.
+- An Xception-style UNet architecture is trained and fine-tuned for nucleus segmentation.
