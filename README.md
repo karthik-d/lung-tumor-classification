@@ -4,8 +4,8 @@
 
 <img src="./figures/DrawIO/Overall-Flowchart_V3.drawio.png" width="800">
 
-- Deep-learning analysis of lung histopathology images to identify lung tumor types.    
-- Study of the imapct of nucleus segmentation in tumor subtyping.
+- Deep-learning analysis of lung histopathology images to discern lung tumor types.    
+- Study of the impact of nucleus segmentation on tumor subtyping.
 - The complete study is summarized as a brief algorithm below.        
   <img src="./figures/Study-Method.png" width="400">
 
