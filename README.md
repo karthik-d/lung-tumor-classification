@@ -23,17 +23,17 @@
         
     <img src="./figures/Annotation-Algorithm.png" width="400" />     
   - The obtained annotations are corrected and **validated by expert pathologists**.
-  - Multiple pathologist corrections and compared and averaged. The comparison is assessed using an inter-rater agreement score, namely **generalized conformity index (GCI)**.
+  - Multiple pathologist corrections are compared and averaged. The comparison is assessed using an inter-rater agreement score, namely **generalized conformity index (GCI)**.
 
 ## Common Downstream Tumor Classification
 
 - The classifier is a **custom lightweight CNN**, that performs downstream tumor subtyping.
-- The common downstream serve the role of a discriminator reference to compare subtyping performances with and without nucleus segmentation of histology images.
+- The common downstream serves the role of a discriminator reference to compare subtyping performances with and without prior nucleus segmentation of histology images.
    
   <img src="./figures/DrawIO/Classifier-Overall_V1.drawio.png" width="600">
 
 ## Intermediate Nucleus Segmentation in the P<sub>seg</sub> Pipeline
 
+- **Driving Rationale:** The nuclei portray sufficiently distinct visual characteristics under each tumor type to discern them apart.
 - Nuclear regions of the lung histology images are segmented out before classification.
-- **Rationale:** The nuclei portray sufficiently distinct visual characteristics under each tumor type to discern them apart.
-- An Xception-style UNet architecture is trained and fine-tuned for nucleus segmentation.
+- An segmentation arhictecture derived heavily from the [Xception-style UNet](https://keras.io/examples/vision/oxford_pets_image_segmentation/) is trained and fine-tuned to automate this nucleus segmentation.
