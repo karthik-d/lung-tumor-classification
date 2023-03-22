@@ -1,7 +1,9 @@
 ## Lung Tumor Subtyping from Histology and the Impact of Nucleus Segmentation on Tumor Discernibility
 
 [**Link to the Research Manuscript**](./Documentation/Draft-1.pdf) (preprint version)
-   
+
+### Brief Overview
+
 <img src="./figures/DrawIO/Overall-Flowchart_V3.drawio.png" width="750">
 
 - Deep-learning analysis of lung histopathology images to discern lung tumor types.    
@@ -15,7 +17,7 @@
 - The data of histopathology images is mainly sourced from [LC25000 Dataset](https://www.kaggle.com/datasets/andrewmvd/lung-and-colon-cancer-histopathological-images).
   - 768 x 768 resolution images of lung histology.
   - Contains patch-level labels of tumor type.
-  - HIPAA compliant and validated source.
+  - [HIPAA](https://www.cdc.gov/phlp/publications/topic/hipaa.html) compliant and validated source.
   - [Detailed data description](https://arxiv.org/abs/1912.12142v1).
   
 - For **further analysis and segmentation**, ground truth was prepared using a **semi-automatic annotation strategy** with the help of expert pathologists.
@@ -23,7 +25,7 @@
         
     <img src="./figures/Annotation-Algorithm.png" width="400" />     
   - The obtained annotations are corrected and **validated by expert pathologists**.
-  - Multiple pathologist corrections are compared and averaged. The comparison is assessed using an inter-rater agreement score, namely **generalized conformity index (GCI)**.
+  - Multiple pathologist corrections are compared and averaged. The comparison is assessed using an inter-rater agreement score, namely **generalized conformity index (GCI)**; a GCI score of 0.89 was obtained.
 
 ## Common Downstream Tumor Classification
 
