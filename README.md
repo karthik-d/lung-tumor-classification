@@ -8,7 +8,7 @@
 
 - Deep-learning analysis of lung histopathology images to discern lung tumor types.    
 - Study of the **impact of nucleus segmentation** on tumor subtyping.
-- The complete study is summarized as a **brief algorithm** below.    
+- The study method is summarized as a **brief algorithm** below.    
       
   <img src="./figures/Study-Method.png" width="400">
 
@@ -29,13 +29,13 @@
 
 ## Common Downstream Tumor Classification
 
-- The classifier is a **custom lightweight CNN**, that performs downstream tumor subtyping.
+- The classifier is a **custom lightweight Convolution Neural Network**, that performs downstream tumor subtyping.
 - The common downstream serves the role of a discriminator reference to compare subtyping performances with and without prior nucleus segmentation of histology images.
    
   <img src="./figures/DrawIO/Classifier-Overall_V1.drawio.png" width="600">
 
 ## Intermediate Nucleus Segmentation in the P<sub>seg</sub> Pipeline
 
-- **Driving Rationale:** The nuclei portray sufficiently distinct visual characteristics under each tumor type to discern them apart.
+- **Rationale:** The nuclei portray sufficiently distinct visual characteristics under each tumor type to discern them apart.
 - Nuclear regions of the lung histology images are segmented out before classification.
 - An segmentation arhictecture derived heavily from the [Xception-style UNet](https://keras.io/examples/vision/oxford_pets_image_segmentation/) is trained and fine-tuned to automate this nucleus segmentation.
