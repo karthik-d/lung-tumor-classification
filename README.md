@@ -4,7 +4,7 @@
 
 ### Brief Overview
 
-<img src="./figures/DrawIO/Overall-Flowchart_V3.drawio.png" width="750">
+<img src="./figures/to-publish/Overall-Flowchart_V3.jpg" width="750">
 
 - Deep-learning analysis of lung histopathology images to discern lung tumor types.    
 - Study of the **impact of nucleus segmentation** on tumor subtyping.
@@ -32,7 +32,7 @@
 - The classifier is a **custom lightweight Convolution Neural Network**, that performs downstream tumor subtyping.
 - The common downstream serves the role of a discriminator reference to compare subtyping performances with and without prior nucleus segmentation of histology images.
    
-  <img src="./figures/DrawIO/Classifier-Overall_V1.drawio.png" width="600">
+  <img src="./figures/to-publish/Classifier-Overall_V2.jpg" width="600">
 
 ## Intermediate Nucleus Segmentation in the P<sub>seg</sub> Pipeline
 
