@@ -15,7 +15,7 @@
 ## Study Dataset and Data Processing
 
 - The data of histopathology images is mainly sourced from [LC25000 Dataset](https://www.kaggle.com/datasets/andrewmvd/lung-and-colon-cancer-histopathological-images).
-  - 768 x 768 resolution images of lung histology.
+  - *768 x 768* resolution images of lung histology.
   - Contains patch-level labels of tumor type.
   - [HIPAA](https://www.cdc.gov/phlp/publications/topic/hipaa.html) compliant and validated source.
   - [Detailed data description](https://arxiv.org/abs/1912.12142v1).
