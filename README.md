@@ -1,6 +1,6 @@
 ## Lung Tumor Subtyping from Histology and the Impact of Nucleus Segmentation on Tumor Discernibility
 
-[**Link to the Research Manuscript**](./Documentation/Draft-1.pdf)
+[**Link to the Research Manuscript**](https://link.springer.com/article/10.1007/s13721-023-00417-2). 
 
 ### Brief Overview
 
