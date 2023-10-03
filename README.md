@@ -23,9 +23,9 @@ If you find our work useful in your research, please cite us:
 }
 ```
 
-### Brief Overview
+## Overview
 
-<img src="./figures/to-publish/Overall-Flowchart_V3.jpg" width="750">
+<img src="./figures/to-publish/Overall-Flowchart_V3.jpg" width="600">
 
 - Deep-learning analysis of lung histopathology images to discern lung tumor types.    
 - Study of the **impact of nucleus segmentation** on tumor subtyping.
