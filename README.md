@@ -1,6 +1,25 @@
-## Lung Tumor Subtyping from Histology and the Impact of Nucleus Segmentation on Tumor Discernibility
+# Lung Tumor Subtyping from Histology and the Impact of Nucleus Segmentation on Tumor Discernibility
 
-[**Link to the Research Manuscript**](https://link.springer.com/article/10.1007/s13721-023-00417-2). 
+## Cite Us
+
+[Link to the Research Paper](https://link.springer.com/article/10.1007/s13721-023-00417-2).
+
+If you find our work useful in your research, please cite us:
+
+```
+@article{jsm2023,
+  title={A deep learning approach for nucleus segmentation and tumor classification from lung histopathological images},
+  author={Jaisakthi, SM and Desingu, Karthik and Mirunalini, P and Pavya, S and Priyadharshini, N},
+  journal={Network Modeling Analysis in Health Informatics and Bioinformatics},
+  volume={12},
+  number={1},
+  pages={22},
+  year={2023},
+  publisher={Springer},
+  url={https://link.springer.com/article/10.1007/s13721-023-00417-2},
+  doi={https://doi.org/10.1007/s13721-023-00417-2}
+}
+```
 
 ### Brief Overview
 
