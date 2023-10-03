@@ -1,5 +1,7 @@
 # Lung Tumor Subtyping from Histology and the Impact of Nucleus Segmentation on Tumor Discernibility
 
+Deep-learning based classification pipeline for subtyping lung tumors from histology.
+
 ## Cite Us
 
 [Link to the Research Paper](https://link.springer.com/article/10.1007/s13721-023-00417-2).
